@@ -7,6 +7,7 @@ public class SnakePatrol : MonoBehaviour
 
     private Transform target;
 
+    public int dmgOnCollision = 20;
     private int destPoint = 0;
 
     public SpriteRenderer spriteRenderer;
@@ -29,6 +30,16 @@ public class SnakePatrol : MonoBehaviour
             destPoint = (destPoint + 1) % waypoints.Length;
             target = waypoints[destPoint];
             spriteRenderer.flipX = !spriteRenderer.flipX;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        /* Si on rentre en collision avec le joueur (taggé) on fait perdre de la vie au joueur */
+        if (collision.transform.CompareTag("Player"))
+        {
+            PlayerHealth health = collision.transform.GetComponent<PlayerHealth>();
+            health.TakeDamage(dmgOnCollision);  
         }
     }
 }

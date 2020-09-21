@@ -3,38 +3,48 @@ using UnityEngine;
 
 public class PlayerMouvement : MonoBehaviour
 {
+    /* Faire bouger le player */
     public float moveSpeed;
     public float jumpForce;
+    private Vector3 velocity = Vector3.zero;
 
+    /* */
     public Rigidbody2D rb;
 
     private bool isJumping;
     private bool isGrounded;
 
-    public Transform groundCheckLeft;
-    public Transform groundCheckRight;
+    /* Variables gérant le saut : vérifier que l'on est bien en contact avec le sol sous les pieds */
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask collisionLayer;
 
+    /* Permet de gérer le flip et les animations des sprites */
     public Animator animator;
     public SpriteRenderer spriteRenderer;
 
-    private Vector3 velocity = Vector3.zero;
+    private float horizontalMouvement;
 
-    void FixedUpdate()
+    public void Update()
     {
-
-        isGrounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
-
-        float horizontalMouvement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-
         if (Input.GetButtonDown("Jump") && isGrounded)
             isJumping = true;
-
-        MovePlayer(horizontalMouvement);
-
+ 
         Flip(rb.velocity.x);
 
         float characterVelocity = Mathf.Abs(rb.velocity.x);
+        /* Permettre le changement d'état dans l'animator selon la vitesse qu'on lui passe */
         animator.SetFloat("Speed", characterVelocity);
+    }
+     
+    /* Opération de physique, la récupération des Input doit se faire dans Update */
+    public void FixedUpdate()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayer);
+
+        horizontalMouvement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+
+        MovePlayer(horizontalMouvement);
     }
 
     private void MovePlayer(float _horizontalMouvement)
@@ -54,5 +64,11 @@ public class PlayerMouvement : MonoBehaviour
             spriteRenderer.flipX = false;
         else if (velocity < -0.1f)
             spriteRenderer.flipX = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }

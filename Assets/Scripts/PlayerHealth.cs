@@ -9,6 +9,11 @@ public class PlayerHealth : MonoBehaviour
 
     public HealthBar healthBar;
 
+    public bool isInvincible = false;
+    public SpriteRenderer graphics;
+    public float secondsToWait = 0.2f;
+    public float delayInvicibility = 3f;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -21,9 +26,37 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(20);
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        if (!isInvincible)
+        {
+            currentHealth -= damage;
+            healthBar.SetHealth(currentHealth);
+            isInvincible = !isInvincible;
+            /* Lancer la coroutine de flash */
+            StartCoroutine(InvicibilityFlash());
+            /* Lancer la coroutine du délai de flash */
+            StartCoroutine(InvisibilityDelay());
+        }
+
+    }
+
+    /* Ajout d'une coroutine permettant de réaliser une fonction toutes les X time */
+    public IEnumerator InvicibilityFlash()
+    {
+        while (isInvincible)
+        {
+            /* Rendre le personnage transparent */
+            graphics.color = new Color(1f, 1f, 1f, 0);
+            yield return new WaitForSeconds(secondsToWait);
+            graphics.color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(secondsToWait);
+        }
+    }
+
+    public IEnumerator InvisibilityDelay()
+    {
+        yield return new WaitForSeconds(delayInvicibility);
+        isInvincible = !isInvincible;
     }
 }
