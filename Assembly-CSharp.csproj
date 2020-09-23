@@ -63,16 +63,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\CurrentSceneManager.cs" />
     <Compile Include="Assets\Scripts\DeathZone.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoadScene.cs" />
+    <Compile Include="Assets\Scripts\GameOverManager.cs" />
+    <Compile Include="Assets\Scripts\HealPowerUp.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Ladder.cs" />
     <Compile Include="Assets\Scripts\LoadSpecificScene.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PickUpObject.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerMouvement.cs" />
     <Compile Include="Assets\Scripts\PlayerSpawn.cs" />
+    <Compile Include="Assets\Scripts\SettingsMenu.cs" />
     <Compile Include="Assets\Scripts\SnakePatrol.cs" />
     <Compile Include="Assets\Scripts\WeakSpot.cs" />
     <Reference Include="UnityEngine">
@@ -683,6 +692,9 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/Laurent/2D-adventure/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.quicksearch">
+      <HintPath>C:/Users/Laurent/2D-adventure/Library/ScriptAssemblies/com.unity.quicksearch.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
