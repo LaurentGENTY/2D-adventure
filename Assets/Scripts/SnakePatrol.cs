@@ -15,6 +15,7 @@ public class SnakePatrol : MonoBehaviour
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         target = waypoints[0];
     }
 
@@ -25,8 +26,9 @@ public class SnakePatrol : MonoBehaviour
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * this.speed * Time.deltaTime, Space.World);
 
-        /* Change de destination si le serpent est arrivé */ 
-        if (Vector3.Distance(transform.position, target.position) < 0.03f) {
+        /* Change de destination si le serpent est arrivé */
+        if (Vector3.Distance(transform.position, target.position) < 0.03f)
+        {
             destPoint = (destPoint + 1) % waypoints.Length;
             target = waypoints[destPoint];
             spriteRenderer.flipX = !spriteRenderer.flipX;
@@ -39,7 +41,7 @@ public class SnakePatrol : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             PlayerHealth health = collision.transform.GetComponent<PlayerHealth>();
-            health.TakeDamage(dmgOnCollision);  
+            health.TakeDamage(dmgOnCollision);
         }
     }
 }

@@ -5,6 +5,7 @@ public class PlayerMouvement : MonoBehaviour
 {
     /* Faire bouger le player */
     public float moveSpeed;
+    public float climbSpeed;
     public float jumpForce;
     private Vector3 velocity = Vector3.zero;
 
@@ -13,6 +14,8 @@ public class PlayerMouvement : MonoBehaviour
 
     private bool isJumping;
     private bool isGrounded;
+    [HideInInspector]
+    public bool isClimbing;
 
     /* Variables gérant le saut : vérifier que l'on est bien en contact avec le sol sous les pieds */
     public Transform groundCheck;
@@ -22,40 +25,70 @@ public class PlayerMouvement : MonoBehaviour
     /* Permet de gérer le flip et les animations des sprites */
     public Animator animator;
     public SpriteRenderer spriteRenderer;
+    public CapsuleCollider2D playerCollider;
 
     private float horizontalMouvement;
+    private float verticalMouvement;
 
+    public AudioClip jumpSoundEffect;
+
+    /* Singleton */
+    public static PlayerMouvement instance;
+
+    public void Awake()
+    {
+        if (instance)
+            Debug.LogWarning("Déjà un script playerMouvement");
+
+        instance = this;
+    }
     public void Update()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        /* Récupérer le mouvement vertical et horizontal */
+        horizontalMouvement = Input.GetAxis("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+        verticalMouvement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
+
+        if (Input.GetButtonDown("Jump") && isGrounded && !isClimbing)
+        {
+            AudioManager.instance.PlayClipAt(jumpSoundEffect, transform.position);
             isJumping = true;
- 
+        }
+
         Flip(rb.velocity.x);
 
         float characterVelocity = Mathf.Abs(rb.velocity.x);
-        /* Permettre le changement d'état dans l'animator selon la vitesse qu'on lui passe */
+
+        /* Permettre le changement d'état dans l'animator selon l'état du déplacement du joueur */
         animator.SetFloat("Speed", characterVelocity);
+        animator.SetBool("isClimbing", isClimbing);
     }
      
     /* Opération de physique, la récupération des Input doit se faire dans Update */
     public void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayer);
-
-        horizontalMouvement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-
-        MovePlayer(horizontalMouvement);
+        MovePlayer(horizontalMouvement,verticalMouvement);
     }
 
-    private void MovePlayer(float _horizontalMouvement)
+    private void MovePlayer(float _horizontalMouvement, float _verticalMouvement)
     {
-        Vector3 targetVelocity = new Vector3(_horizontalMouvement, rb.velocity.y);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, 0.05f);
+        if (!isClimbing)
+        {
+            /* Déplacement horizontal */
+            Vector3 targetVelocity = new Vector2(_horizontalMouvement, rb.velocity.y);
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, 0.05f);
 
-        if (isJumping) {
-            rb.AddForce(new Vector2(0f, jumpForce));
-            isJumping = false;
-        }
+            if (isJumping)
+            {
+                rb.AddForce(new Vector2(0f, jumpForce));
+                isJumping = false;
+            }
+        } else
+        {
+            /* Déplacement vertical */
+            Vector3 targetVelocity = new Vector2(0, _verticalMouvement);
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, 0.05f);
+        }        
     }
 
     public void Flip(float velocity)
