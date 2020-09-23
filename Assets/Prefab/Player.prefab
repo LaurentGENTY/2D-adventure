@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563611490515492129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0134, y: -0.3519, z: 0}
+  m_LocalPosition: {x: 0.033, y: -0.704, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 563611491242843482}
@@ -131,8 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 500
+  climbSpeed: 300
   jumpForce: 300
   rb: {fileID: 563611491242843483}
+  isClimbing: 0
   groundCheck: {fileID: 563611490515492130}
   groundCheckRadius: 0.4
   collisionLayer:
@@ -140,6 +142,7 @@ MonoBehaviour:
     m_Bits: 1
   animator: {fileID: 563611491242843486}
   spriteRenderer: {fileID: 563611491242843481}
+  playerCollider: {fileID: 563611491242843484}
 --- !u!50 &563611491242843483
 Rigidbody2D:
   serializedVersion: 4
@@ -199,6 +202,7 @@ MonoBehaviour:
   graphics: {fileID: 563611491242843481}
   secondsToWait: 0.2
   delayInvicibility: 3
+  hitSoundEffect: {fileID: 8300000, guid: fc14c579ba29819499f56c1cd13ab1d2, type: 3}
 --- !u!70 &563611491242843484
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -212,6 +216,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015655637, y: -0.15442038}
-  m_Size: {x: 0.47625184, y: 0.69115925}
+  m_Offset: {x: 0.026595235, y: -0.30976474}
+  m_Size: {x: 0.9313457, y: 1.3694236}
   m_Direction: 0
