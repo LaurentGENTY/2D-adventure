@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class LoadSpecificScene : MonoBehaviour
 {
     public string sceneName;
-    public Animator fadeSystem;
+    private Animator fadeSystem;
 
     public AudioClip nextLevelSoundEffect;
 
@@ -26,6 +26,9 @@ public class LoadSpecificScene : MonoBehaviour
 
     public IEnumerator loadNextScene()
     {
+        /* Sauvegarder les données avant de passer à un autre niveau */
+        LoadAndSaveData.instance.SaveData();
+
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(sceneName);
