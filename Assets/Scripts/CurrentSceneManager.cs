@@ -3,11 +3,14 @@
 /* Permet de gérer le cas de la destruction et duplication des objets lors d'une mort du joueur */
 public class CurrentSceneManager : MonoBehaviour
 {
-    public bool isPlayerPresentByDefault = false;
-
     public int coinsPickedUpInThisSceneCount;
 
+    public Vector3 respawnPoint;
+
     public static CurrentSceneManager instance;
+
+    public int levelToUnlock;
+
     private void Awake()
     {
         if (instance)
@@ -17,6 +20,8 @@ public class CurrentSceneManager : MonoBehaviour
         }
 
         instance = this;
+
+        respawnPoint = GameObject.FindGameObjectWithTag("Player").transform.position;
     }
 
 }

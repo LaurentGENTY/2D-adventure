@@ -3,13 +3,11 @@ using System.Collections;
 
 public class DeathZone : MonoBehaviour
 {
-    private Transform playerSpawn;
     public Animator fadeSystem;
 
     /* On récupère les variables qu'une fois dans le Awake afin que cela ne coûte pas trop cher */
     public void Awake()
     {
-        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
     }
 
@@ -26,6 +24,6 @@ public class DeathZone : MonoBehaviour
     {
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
-        collision.transform.position = playerSpawn.position;
+        collision.transform.position = CurrentSceneManager.instance.respawnPoint;
     }
 }

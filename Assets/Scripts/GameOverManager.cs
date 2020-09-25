@@ -20,10 +20,6 @@ public class GameOverManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        /* Si le joueur est présent par défaut, cela veut dire qu'il y aura duplication dans la scene des objets */
-        if (CurrentSceneManager.instance.isPlayerPresentByDefault)
-            DontDestroyOnLoadScene.instance.RemoveFromDontDestroyOnLoad();
-
         gameOverUI.SetActive(true);
     }
 
@@ -48,8 +44,6 @@ public class GameOverManager : MonoBehaviour
 
     public void MainMenuButton()
     {
-        /* Si on revient au menu principal, on doit supprimer tous les objets */
-        DontDestroyOnLoadScene.instance.RemoveFromDontDestroyOnLoad();
         SceneManager.LoadScene("MainMenu");
     }
 

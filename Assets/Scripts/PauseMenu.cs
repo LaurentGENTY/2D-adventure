@@ -60,9 +60,6 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        /* Si on revient au menu principal, on doit supprimer tous les objets */
-        DontDestroyOnLoadScene.instance.RemoveFromDontDestroyOnLoad();
-
         Resume();
 
         SceneManager.LoadScene("MainMenu");
