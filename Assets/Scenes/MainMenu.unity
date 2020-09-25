@@ -647,8 +647,8 @@ RectTransform:
   - {fileID: 1375642303}
   - {fileID: 1381305209}
   - {fileID: 445038840}
-  - {fileID: 1476372828}
   - {fileID: 2031835686}
+  - {fileID: 1476372828}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -669,8 +669,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 902b472c69f7d7e45abc6a1eb249d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Level01
+  levelToLoad: LevelSelect
   settingsWindow: {fileID: 1476372827}
+  clickEffect: {fileID: 8300000, guid: 9ca546725e9940d43ac3586f56b150be, type: 3}
 --- !u!1 &1375642302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1054,7 @@ RectTransform:
   m_Children:
   - {fileID: 996921192}
   m_Father: {fileID: 1308174951}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1289,7 +1290,7 @@ PrefabInstance:
     - target: {fileID: 3255411693463982470, guid: 0d0b1ee2b2f98674887478cac0c4121b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3255411693463982470, guid: 0d0b1ee2b2f98674887478cac0c4121b,
         type: 3}
