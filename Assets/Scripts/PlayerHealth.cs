@@ -38,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
-            TakeDamage(100);
+            TakeDamage(50);
     }
 
     public void HealPlayer(int amount)
