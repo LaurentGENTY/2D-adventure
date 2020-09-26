@@ -88,3 +88,4 @@ MonoBehaviour:
   nameText: {fileID: 0}
   dialogueText: {fileID: 0}
   animator: {fileID: 0}
+  clickEffect: {fileID: 8300000, guid: 9ca546725e9940d43ac3586f56b150be, type: 3}
