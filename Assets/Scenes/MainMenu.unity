@@ -671,7 +671,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelToLoad: LevelSelect
   settingsWindow: {fileID: 1476372827}
-  clickEffect: {fileID: 8300000, guid: 9ca546725e9940d43ac3586f56b150be, type: 3}
 --- !u!1 &1375642302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1246,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1308174952}
+    - target: {fileID: 3255411691668370136, guid: 0d0b1ee2b2f98674887478cac0c4121b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSettingsButton
+      objectReference: {fileID: 0}
     - target: {fileID: 3255411693463982465, guid: 0d0b1ee2b2f98674887478cac0c4121b,
         type: 3}
       propertyPath: m_Name
